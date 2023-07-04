@@ -11,14 +11,15 @@ import static ru.yandex_praktikum.constant.BaseConstant.*;
 public class UserClient extends BaseClient {
 
 
-    public ValidatableResponse register(CreateUserRequest createUserRequest){
+    public ValidatableResponse register(CreateUserRequest createUserRequest) {
         return given()
-            .spec(getSpec())
-            .body(createUserRequest)
-            .when()
-            .post(REGISTER_URL)
-            .then();
-        }
+                .spec(getSpec())
+                .body(createUserRequest)
+                .when()
+                .post(REGISTER_URL)
+                .then();
+    }
+
     public ValidatableResponse delete(String token) {
         return given()
                 .spec(getSpec())
@@ -27,7 +28,8 @@ public class UserClient extends BaseClient {
                 .delete(USER_URL)
                 .then();
     }
-    public ValidatableResponse login(LoginUserRequest loginUserRequest){
+
+    public ValidatableResponse login(LoginUserRequest loginUserRequest) {
         return given()
                 .spec(getSpec())
                 .body(loginUserRequest)
@@ -35,6 +37,7 @@ public class UserClient extends BaseClient {
                 .post(LOGIN_URL)
                 .then();
     }
+
     public ValidatableResponse update(String token, UpdateUserRequest updateUserRequest) {
         return given()
                 .spec(getSpec())

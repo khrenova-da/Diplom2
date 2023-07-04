@@ -2,16 +2,13 @@ package ru.yandex_praktikum.diplom2;
 
 import io.qameta.allure.junit4.DisplayName;
 import org.hamcrest.Matchers;
-import org.junit.After;
 import org.junit.Test;
-import ru.yandex_praktikum.clients.UserClient;
 import ru.yandex_praktikum.dataprovider.UserProvider;
 import ru.yandex_praktikum.pojo.CreateUserRequest;
 import ru.yandex_praktikum.pojo.LoginUserRequest;
 
-public class LoginUserRequestTest {
-    private final UserClient userClient = new UserClient();
-    private String accessToken;
+public class LoginUserRequestTest extends BaseTest {
+
     @Test
     @DisplayName("User with correct request should be login")
     public void userWithCorrectRequestShouldBeLogin() {
@@ -25,6 +22,7 @@ public class LoginUserRequestTest {
                 .statusCode(200)
                 .body("success", Matchers.equalTo(true));
     }
+
     @Test
     @DisplayName("User without email should not be login")
     public void userWithoutEmailShouldNotBeLogin() {
@@ -38,6 +36,7 @@ public class LoginUserRequestTest {
                 .statusCode(401)
                 .body("message", Matchers.equalTo("email or password are incorrect"));
     }
+
     @Test
     @DisplayName("User without password should not be login")
     public void userWithoutPasswordShouldNotBeLogin() {
@@ -51,12 +50,5 @@ public class LoginUserRequestTest {
                 .statusCode(401)
                 .body("message", Matchers.equalTo("email or password are incorrect"));
     }
-    @After
-    public void tearDown() {
-        if (accessToken != null) {
-            userClient.delete(accessToken)
-                    .statusCode(202)
-                    .body("success", Matchers.equalTo(true));
-        }
-    }
+
 }

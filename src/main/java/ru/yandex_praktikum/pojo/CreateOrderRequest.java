@@ -1,2 +1,17 @@
-package ru.yandex_praktikum.pojo;public class CreateOrderRequest {
+package ru.yandex_praktikum.pojo;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class CreateOrderRequest {
+    private List<String> ingredients;
+
 }

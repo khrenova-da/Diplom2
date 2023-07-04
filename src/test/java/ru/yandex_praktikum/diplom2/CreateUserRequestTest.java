@@ -2,15 +2,11 @@ package ru.yandex_praktikum.diplom2;
 
 import io.qameta.allure.junit4.DisplayName;
 import org.hamcrest.Matchers;
-import org.junit.After;
 import org.junit.Test;
-import ru.yandex_praktikum.clients.UserClient;
 import ru.yandex_praktikum.dataprovider.UserProvider;
 import ru.yandex_praktikum.pojo.CreateUserRequest;
 
-public class CreateUserRequestTest {
-    private final UserClient userClient = new UserClient();
-    private String accessToken;
+public class CreateUserRequestTest extends BaseTest {
 
     @Test
     @DisplayName("User with correct request should be register")
@@ -22,6 +18,7 @@ public class CreateUserRequestTest {
                 .body("success", Matchers.equalTo(true))
                 .extract().jsonPath().get("accessToken");
     }
+
     @Test
     @DisplayName("User re-registration is not possible")
     public void userReRegistrationIsNotPossible() {
@@ -34,6 +31,7 @@ public class CreateUserRequestTest {
                 .statusCode(403)
                 .body("message", Matchers.equalTo("User already exists"));
     }
+
     @Test
     @DisplayName("User without email should not register")
     public void userWithoutEmailShouldNotRegister() {
@@ -43,6 +41,7 @@ public class CreateUserRequestTest {
                 .statusCode(403)
                 .body("message", Matchers.equalTo("Email, password and name are required fields"));
     }
+
     @Test
     @DisplayName("User without email should not register")
     public void userWithoutPasswordShouldNotRegister() {
@@ -52,6 +51,7 @@ public class CreateUserRequestTest {
                 .statusCode(403)
                 .body("message", Matchers.equalTo("Email, password and name are required fields"));
     }
+
     @Test
     @DisplayName("User without email should not register")
     public void userWithoutNameShouldNotRegister() {
@@ -62,12 +62,5 @@ public class CreateUserRequestTest {
                 .body("message", Matchers.equalTo("Email, password and name are required fields"));
     }
 
-    @After
-    public void tearDown() {
-        if (accessToken != null) {
-            userClient.delete(accessToken)
-                    .statusCode(202)
-                    .body("success", Matchers.equalTo(true));
-        }
-    }
+
 }
