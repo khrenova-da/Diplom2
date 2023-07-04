@@ -34,6 +34,7 @@ public class CreateOrderRequestTest extends BaseTest {
 
     }
 
+    //тест падает, т.к. находит баг - неавторизованный юзер может создать заказ
     @Test
     @DisplayName("Unauthorized user can not create order")
     public void unauthorizedUserCanNotCreateOrder() {
